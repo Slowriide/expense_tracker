@@ -2,7 +2,8 @@ import 'package:control_gastos/core/router/app_router.dart';
 import 'package:control_gastos/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

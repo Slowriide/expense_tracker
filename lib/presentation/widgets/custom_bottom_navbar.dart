@@ -93,7 +93,7 @@ class CustomBottomNavbar extends StatelessWidget {
                   height: 60,
                   width: 60,
                   decoration: BoxDecoration(
-                    color: theme.primary,
+                    color: theme.secondary,
                     shape: BoxShape.circle,
                   ),
                   child: Icon(Icons.add, color: Colors.white, size: 30),
@@ -126,12 +126,12 @@ class CustomBottomNavbar extends StatelessWidget {
           children: [
             Icon(
               isSelected ? activeIcon : icon,
-              color: isSelected ? theme.primary : theme.onSurface,
+              color: isSelected ? theme.secondary : theme.onSurface,
             ),
             Text(
               label,
               style: TextStyle(
-                color: isSelected ? theme.primary : theme.onSurface,
+                color: isSelected ? theme.secondary : theme.onSurface,
                 fontSize: 12,
               ),
             ),
