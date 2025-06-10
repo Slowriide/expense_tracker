@@ -1,7 +1,11 @@
+import 'package:control_gastos/domain/entities/expense.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ExpenseTile extends StatelessWidget {
-  const ExpenseTile({super.key});
+  final Expense expense;
+
+  const ExpenseTile({super.key, required this.expense});
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +43,11 @@ class ExpenseTile extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Groceries', style: textStyle.bodyMedium),
+                  Text(expense.title, style: textStyle.bodyMedium),
                   Text(
-                    'March 15, 2024',
+                    DateFormat(
+                      'dd/MM/yyyy - hh:mm a',
+                    ).format(expense.date.toLocal()),
                     style: textStyle.bodySmall?.copyWith(fontSize: 12),
                   ),
                 ],
@@ -50,7 +56,7 @@ class ExpenseTile extends StatelessWidget {
           ),
           // Amount spent
           Text(
-            '\$45.00',
+            '\$${expense.amount.toStringAsFixed(2)}',
             style: textStyle.bodyLarge?.copyWith(color: Colors.red),
           ),
         ],

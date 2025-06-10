@@ -1,9 +1,15 @@
+import 'package:control_gastos/presentation/views/home/expenses_view.dart';
 import 'package:control_gastos/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
@@ -37,14 +43,7 @@ class HomeView extends StatelessWidget {
                   sizedBox10,
                 ],
               ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return ExpenseTile();
-                  },
-                ),
-              ),
+              Expanded(child: ExpensesView()),
             ],
           ),
         ),

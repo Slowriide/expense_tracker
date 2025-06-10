@@ -33,7 +33,7 @@ class AppTheme {
       bodyLarge: GoogleFonts.sora().copyWith(
         color: Colors.black,
         fontSize: 20,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w600,
       ),
       bodyMedium: GoogleFonts.sora().copyWith(
         color: Colors.black,
@@ -53,6 +53,18 @@ class AppTheme {
       unselectedItemColor: Colors.grey[700],
       unselectedIconTheme: IconThemeData(color: Colors.grey[700]),
       unselectedLabelStyle: const TextStyle(color: Colors.white),
+    ),
+
+    //text form field
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15),
+        borderSide: BorderSide(),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15),
+        borderSide: BorderSide(color: Colors.deepPurple.shade400, width: 2),
+      ),
     ),
   );
 }

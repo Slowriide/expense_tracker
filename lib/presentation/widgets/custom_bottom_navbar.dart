@@ -1,3 +1,4 @@
+import 'package:control_gastos/presentation/presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,13 +25,18 @@ class CustomBottomNavbar extends StatelessWidget {
 
   void onCentralButtonTapped(BuildContext context) {
     // Acción al tocar el botón central
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      builder:
-          (_) => AlertDialog(
-            title: Text('Agregar gasto'),
-            content: Text('Aquí puedes abrir un modal o navegar a otra ruta.'),
-          ),
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsetsGeometry.all(15),
+          child: ExpenseForm(),
+        );
+      },
     );
   }
 

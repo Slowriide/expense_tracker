@@ -1,3 +1,4 @@
+import 'package:control_gastos/domain/entities/expense.dart';
 import 'package:control_gastos/presentation/presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -20,6 +21,20 @@ final appRouter = GoRouter(
       routes: [
         // Add nested routes here if needed
       ],
+    ),
+
+    GoRoute(
+      path: '/editexpenses',
+      builder: (context, state) {
+        final extra = state.extra;
+        if (extra == null || extra is! Expense) {
+          return const Scaffold(
+            body: Center(child: Text('Expense data is missing')),
+          );
+        }
+
+        return EditExpenseView(expense: extra);
+      },
     ),
   ],
 );
