@@ -1,42 +1,54 @@
+import 'package:control_gastos/presentation/providers/balance_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class BalanceBox extends StatelessWidget {
+class BalanceBox extends ConsumerWidget {
   const BalanceBox({super.key, required this.textStyle});
 
   final TextTheme textStyle;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade100,
-            blurRadius: 5,
-            offset: Offset(3, 5),
-            spreadRadius: 3,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final balanceAsync = ref.watch(balanceProvider);
+    return balanceAsync.when(
+      data:
+          (balance) => Container(
+            padding: EdgeInsets.all(20),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade100,
+                  blurRadius: 5,
+                  offset: Offset(3, 5),
+                  spreadRadius: 3,
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Total balance', style: textStyle.bodySmall),
+                Text(
+                  '\$ ${balance.total.toStringAsFixed(2)}',
+                  style: textStyle.titleMedium,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _incomeAndExpense(isIncome: true, amount: balance.income),
+                    _incomeAndExpense(isIncome: false, amount: balance.expense),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Total balance', style: textStyle.bodySmall),
-          Text('\$12,5905.32', style: textStyle.titleMedium),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _incomeAndExpense(isIncome: true, amount: 12590.32),
-              _incomeAndExpense(isIncome: false, amount: 120.3),
-            ],
-          ),
-        ],
-      ),
+      error: (error, stackTrace) => Text('Error: $error'),
+      loading:
+          () => const Center(child: CircularProgressIndicator(strokeWidth: 2)),
     );
   }
 

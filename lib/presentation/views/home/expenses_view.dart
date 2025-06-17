@@ -57,7 +57,7 @@ class ExpensesViewState extends ConsumerState<ExpensesView> {
     return expensesAsync.when(
       data:
           (expenses) => ListView.builder(
-            itemCount: expenses.length,
+            itemCount: 7,
             itemBuilder: (context, index) {
               final expense = expenses[index];
               return GestureDetector(
