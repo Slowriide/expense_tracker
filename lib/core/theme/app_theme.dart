@@ -1,3 +1,4 @@
+import 'package:control_gastos/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -57,6 +58,8 @@ class AppTheme {
 
     //text form field
     inputDecorationTheme: InputDecorationTheme(
+      floatingLabelBehavior: FloatingLabelBehavior.always,
+      hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15),
         borderSide: BorderSide(),
@@ -64,6 +67,34 @@ class AppTheme {
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15),
         borderSide: BorderSide(color: Colors.deepPurple.shade400, width: 2),
+      ),
+    ),
+
+    //DATE PICKER
+    datePickerTheme: DatePickerThemeData(
+      cancelButtonStyle: TextButton.styleFrom(
+        foregroundColor: AppColors().text,
+      ),
+      confirmButtonStyle: TextButton.styleFrom(
+        foregroundColor: AppColors().text,
+      ),
+      dividerColor: Colors.transparent,
+      backgroundColor: AppColors().surface,
+      headerHelpStyle: TextStyle(color: AppColors().text),
+      headerForegroundColor: AppColors().text,
+      todayBorder: BorderSide(color: AppColors().secondary),
+      todayBackgroundColor: WidgetStateProperty.all(AppColors().secondary),
+      yearStyle: TextStyle(color: AppColors().text),
+      inputDecorationTheme: InputDecorationTheme(
+        hintStyle: TextStyle(color: AppColors().text),
+        labelStyle: TextStyle(color: AppColors().secondary),
+        focusColor: AppColors().text,
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColors().secondary),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors().secondary, width: 2),
+        ),
       ),
     ),
   );

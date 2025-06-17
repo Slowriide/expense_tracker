@@ -15,12 +15,12 @@ class EditExpenseView extends ConsumerStatefulWidget {
 }
 
 class EditExpenseViewState extends ConsumerState<EditExpenseView> {
-  bool _isIncome = false;
-
   /// FocusNodes to manage focus state for the text fields
   /// This allows us to change the label color dynamically based on focus.
+  late bool _isIncome;
   late FocusNode _amountFocusNode;
   late FocusNode _titleFocusNode;
+  late ExpenseCategory _selectedCategory;
   DateTime? _selectedDate;
   final _amountController = TextEditingController();
   final _titleController = TextEditingController();
@@ -32,7 +32,10 @@ class EditExpenseViewState extends ConsumerState<EditExpenseView> {
     // 2. Add listeners to the FocusNodes to update the state when focus changes
     _amountFocusNode = FocusNode()..addListener(_onFocusChange);
     _titleFocusNode = FocusNode()..addListener(_onFocusChange);
+    _selectedCategory = widget.expense.category;
     _titleController.text = widget.expense.title;
+    _isIncome = widget.expense.isIncome;
+    _selectedDate = widget.expense.date;
     _amountController.text = widget.expense.amount.toStringAsFixed(2);
   }
 
@@ -63,7 +66,7 @@ class EditExpenseViewState extends ConsumerState<EditExpenseView> {
       title: _titleController.text,
       amount: amount,
       isIncome: _isIncome,
-      category: widget.expense.category,
+      category: _selectedCategory,
       date: _selectedDate ?? DateTime.now(),
     );
 
@@ -88,6 +91,15 @@ class EditExpenseViewState extends ConsumerState<EditExpenseView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  CategoryTileDropdown(
+                    selectedCategory: _selectedCategory,
+                    onChanged: (newCategory) {
+                      setState(() {
+                        _selectedCategory = newCategory;
+                      });
+                    },
+                  ),
+                  SizedBox(height: 20),
                   _buildAmountAndTypeFields(context),
                   SizedBox(height: 20),
                   _buildDatepicker(),
@@ -129,22 +141,13 @@ class EditExpenseViewState extends ConsumerState<EditExpenseView> {
     return SizedBox(
       width: screen.width * 0.6,
       height: 55,
-      child: TextFormField(
+      child: MyTextFormField(
         controller: _amountController,
-        focusNode: _amountFocusNode,
-
-        style: textStyle.bodyLarge?.copyWith(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-        decoration: InputDecoration(
-          labelText: 'Amonut',
-          floatingLabelStyle: textStyle.bodyLarge?.copyWith(
-            color: amountLabelColor,
-          ),
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-        ),
+        focusnode: _amountFocusNode,
         keyboardType: TextInputType.number,
+        labelText: 'Amonut',
+        labelColor: amountLabelColor,
+        hint: '50',
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Por favor ingresa un monto';
@@ -163,41 +166,8 @@ class EditExpenseViewState extends ConsumerState<EditExpenseView> {
     return SizedBox(
       width: screen.width * 0.3,
       height: 55,
-      child: DropdownButtonFormField(
-        value: _isIncome,
-        decoration: InputDecoration(
-          labelText: 'Type',
-          floatingLabelStyle: textStyle.bodyLarge,
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide(color: Colors.black),
-          ),
-        ),
-        items: [
-          DropdownMenuItem(
-            value: false,
-            child: Text(
-              'Expense',
-              style: textStyle.bodyLarge?.copyWith(
-                color: Colors.red,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          DropdownMenuItem(
-            value: true,
-            child: Text(
-              'Income',
-              style: textStyle.bodyLarge?.copyWith(
-                color: Colors.green,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-        ],
+      child: TypeTyleDropdown(
+        isIncome: _isIncome,
         onChanged: (value) {
           if (value != null) {
             setState(() {
@@ -256,24 +226,16 @@ class EditExpenseViewState extends ConsumerState<EditExpenseView> {
   }
 
   Widget _buildTitle() {
-    final textStyle = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     final Color titleLabelColor =
         _titleFocusNode.hasFocus ? colorScheme.secondary : Colors.black;
-    return TextFormField(
+
+    return MyTextFormField(
       controller: _titleController,
-      focusNode: _titleFocusNode,
-      style: textStyle.bodyLarge?.copyWith(
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-      ),
-      decoration: InputDecoration(
-        labelText: 'Title',
-        floatingLabelStyle: textStyle.bodyLarge?.copyWith(
-          color: titleLabelColor,
-        ),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-      ),
+      focusnode: _titleFocusNode,
+      labelText: 'Title',
+      hint: 'Food',
+      labelColor: titleLabelColor,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Por favor ingresa un título';

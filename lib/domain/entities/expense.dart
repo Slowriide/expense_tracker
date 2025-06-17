@@ -1,9 +1,24 @@
+import 'package:control_gastos/common/utils/expense_category_from_string.dart';
+
+enum ExpenseCategory {
+  food,
+  transport,
+  entertainment,
+  shopping,
+  utilities,
+  healt,
+  gym,
+  education,
+  work,
+  other,
+}
+
 class Expense {
   final int? id;
   final String title;
   final double amount;
   final DateTime date;
-  final String? category;
+  final ExpenseCategory category;
   final bool isIncome;
 
   Expense({
@@ -20,7 +35,7 @@ class Expense {
     String? title,
     double? amount,
     DateTime? date,
-    String? category,
+    ExpenseCategory? category,
     bool? isIncome,
   }) {
     return Expense(
@@ -43,12 +58,10 @@ class Expense {
       'title': title,
       'amount': amount,
       'date': date.toIso8601String(),
-      'category': category,
+      'category': category.name,
       'isIncome': isIncome ? 1 : 0, // Store boolean as integer
     };
-    if (id != null) {
-      map['id'] = id;
-    }
+    if (id != null) map['id'] = id!;
     return map;
   }
 
@@ -58,7 +71,7 @@ class Expense {
       title: map['title'] as String,
       amount: map['amount'] as double,
       date: DateTime.parse(map['date'] as String),
-      category: map['category'] as String?,
+      category: expenseCategoryFromString(map['category'] as String?),
       isIncome: (map['isIncome'] as int) == 1, // Convert integer to boolean
     );
   }
