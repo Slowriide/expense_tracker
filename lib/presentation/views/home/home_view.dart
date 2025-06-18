@@ -1,6 +1,7 @@
 import 'package:control_gastos/presentation/views/home/expenses_view.dart';
 import 'package:control_gastos/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -32,7 +33,9 @@ class _HomeViewState extends State<HomeView> {
                   Text('Last Expenses', style: textStyle.bodyLarge),
                   const Spacer(),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.push('/allmoves');
+                    },
                     child: Text(
                       'See all',
                       style: textStyle.bodyMedium?.copyWith(

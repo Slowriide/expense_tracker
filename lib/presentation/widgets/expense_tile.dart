@@ -57,7 +57,9 @@ class ExpenseTile extends StatelessWidget {
           // Amount spent
           Text(
             '\$${expense.amount.toStringAsFixed(2)}',
-            style: textStyle.bodyLarge?.copyWith(color: Colors.red),
+            style: textStyle.bodyLarge?.copyWith(
+              color: expense.isIncome ? Colors.green : Colors.red,
+            ),
           ),
         ],
       ),

@@ -36,5 +36,6 @@ final appRouter = GoRouter(
         return EditExpenseView(expense: extra);
       },
     ),
+    GoRoute(path: '/allmoves', builder: (context, state) => AllMovesView()),
   ],
 );
