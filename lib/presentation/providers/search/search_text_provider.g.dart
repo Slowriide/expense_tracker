@@ -20,7 +20,7 @@ final searchTextProvider = NotifierProvider<SearchText, String>.internal(
 );
 
 typedef _$SearchText = Notifier<String>;
-String _$isSearchingHash() => r'0ad45477d3c626edebaacd89a57b7f4afcba4aea';
+String _$isSearchingHash() => r'90d3491193a9d0756c5315aabe964452a956cb4b';
 
 /// See also [IsSearching].
 @ProviderFor(IsSearching)
