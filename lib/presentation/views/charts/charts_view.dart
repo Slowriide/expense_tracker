@@ -16,21 +16,24 @@ class _ChartsViewState extends State<ChartsView> {
       child: Scaffold(
         body: Padding(
           padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Column(
-                  children: [
-                    ChartDropdownButton(),
-                    sizedBox10,
-                    ChartSwitchButton(),
-                  ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ChartDropdownButton(),
+                      sizedBox10,
+                      ChartSwitchButton(),
+                    ],
+                  ),
                 ),
-              ),
-              sizedBox10,
-              ChartViewContainer(),
-            ],
+                sizedBox10,
+                ChartViewContainer(),
+              ],
+            ),
           ),
         ),
       ),

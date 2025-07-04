@@ -1,0 +1,1 @@
+enum DateFilterType { month, year }
