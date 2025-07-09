@@ -1,3 +1,4 @@
+import 'package:control_gastos/common/utils/get_month_by_number.dart';
 import 'package:control_gastos/presentation/views/charts/helpers/date_filter_type.dart';
 import 'package:control_gastos/presentation/views/charts/providers/charts_filter_provider.dart';
 import 'package:control_gastos/presentation/views/charts/providers/expense_category_totals_by_date_provider.dart';
@@ -49,7 +50,7 @@ class ChartViewContainer extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    ' ${isIncome ? "Ingresos" : "Gastos"} - ${isYearly ? "Year ${filterValue.year}" : "${_monthName(filterValue.month)} ${filterValue.year}"} ',
+                    ' ${isIncome ? "Incomes" : "Expenses"} - ${isYearly ? "Year ${filterValue.year}" : "${getMonthByNumber(filterValue.month)} ${filterValue.year}"} ',
                     style: Theme.of(
                       context,
                     ).textTheme.bodyLarge?.copyWith(fontSize: 18),
@@ -114,23 +115,5 @@ class ChartViewContainer extends ConsumerWidget {
         ),
       ],
     );
-  }
-
-  String _monthName(int month) {
-    const monthNames = [
-      'Enero',
-      'Febrero',
-      'Marzo',
-      'Abril',
-      'Mayo',
-      'Junio',
-      'Julio',
-      'Agosto',
-      'Septiembre',
-      'Octubre',
-      'Noviembre',
-      'Diciembre',
-    ];
-    return monthNames[month - 1];
   }
 }

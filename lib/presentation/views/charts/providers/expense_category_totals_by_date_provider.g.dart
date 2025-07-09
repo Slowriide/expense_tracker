@@ -7,7 +7,7 @@ part of 'expense_category_totals_by_date_provider.dart';
 // **************************************************************************
 
 String _$expenseCategoryTotalsByDateHash() =>
-    r'3529edd3fd221f81374e313a1d4dcb059d3d69a6';
+    r'55dc3c5ed28d70adf7fc65b9697f93f6747452de';
 
 /// Copied from Dart SDK
 class _SystemHash {

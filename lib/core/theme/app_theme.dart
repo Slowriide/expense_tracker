@@ -4,12 +4,18 @@ import 'package:google_fonts/google_fonts.dart';
 
 /// This class defines the app's theme using Material 3 design principles.
 class AppTheme {
+  late final AppColors colors;
+
+  AppTheme() {
+    colors = AppColors();
+  }
   ThemeData getTheme() => ThemeData(
     useMaterial3: true,
 
     colorScheme: ColorScheme.light(
       primary: Color(0xFFf0f2ff),
       secondary: Colors.deepPurple,
+      tertiary: colors.tertiary,
       surface: Colors.white,
       error: Colors.red,
       onPrimary: Colors.white,

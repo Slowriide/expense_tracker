@@ -1,4 +1,4 @@
-export './calendar_view.dart';
+export 'calendar/calendar_view.dart';
 export 'charts/charts_view.dart';
 export 'home/home_view.dart';
 export './user_view.dart';

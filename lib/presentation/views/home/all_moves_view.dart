@@ -3,7 +3,6 @@ import 'package:control_gastos/presentation/providers/search/search_text_provide
 import 'package:control_gastos/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 class AllMovesView extends ConsumerStatefulWidget {
   const AllMovesView({super.key});
@@ -29,15 +28,7 @@ class AllMovesViewState extends ConsumerState<AllMovesView> {
             itemCount: filtedesExpenses.length,
             itemBuilder: (context, index) {
               final expense = filtedesExpenses[index];
-              return GestureDetector(
-                onTap: () {
-                  if (expense.id != null) {
-                    context.push('/editexpenses', extra: expense);
-                  }
-                },
-
-                child: ExpenseTile(expense: expense),
-              );
+              return ExpenseTile(expense: expense);
             },
           ),
         ),
