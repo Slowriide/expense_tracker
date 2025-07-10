@@ -36,6 +36,17 @@ final appRouter = GoRouter(
         return EditExpenseView(expense: extra);
       },
     ),
-    GoRoute(path: '/allmoves', builder: (context, state) => AllMovesView()),
+    GoRoute(path: '/settings', builder: (context, state) => SettingsScreen()),
+    GoRoute(path: '/category', builder: (context, state) => CategoryScreen()),
+    GoRoute(path: '/currency', builder: (context, state) => CurrencyScreen()),
+    GoRoute(path: '/rate', builder: (context, state) => RateScreen()),
+    GoRoute(
+      path: '/privacypolicy',
+      builder: (context, state) => PrivacyPolicyScreen(),
+    ),
+    GoRoute(
+      path: '/exportaccount',
+      builder: (context, state) => ExportAccScreen(),
+    ),
   ],
 );
